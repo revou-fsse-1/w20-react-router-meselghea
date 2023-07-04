@@ -1,40 +1,24 @@
-> **Warning**  
-> The `@remix-run/vercel` runtime adapter has been deprecated in favor of out of
-> the box Vercel functionality and will be removed in Remix v2.  
-> This means you don't have to use the Vercel template & can just use the Remix
-> template instead.
+# Week 20 Assignment (react router with Server-side rendering (SSR) )
 
-# Welcome to Remix!
+For this week's assignment, I'm building a front-end website SSR using React.
 
-- [Remix Docs](https://remix.run/docs)
+## Links
 
-## Deployment
+[olabar.meselghea.site](https://olabar.meselghea.site/)
 
-After having run the `create-remix` command and selected "Vercel" as a deployment target, you only need to [import your Git repository](https://vercel.com/new) into Vercel, and it will be deployed.
+## Quick Start
 
-If you'd like to avoid using a Git repository, you can also deploy the directory by running [Vercel CLI](https://vercel.com/cli):
+1. Open [olabar.meselghea.site](https://olabar.meselghea.site/)
 
-```sh
-npm i -g vercel
-vercel
-```
+2. Login with admin account
+   `email: "admin@gmail.com"
+password: "admin123"`
 
-It is generally recommended to use a Git repository, because future commits will then automatically be deployed by Vercel, through its [Git Integration](https://vercel.com/docs/concepts/git).
+3. Now you can explore the dashboard!
 
-## Development
+##
 
-To run your Remix app locally, make sure your project's local dependencies are installed:
-
-```sh
-npm install
-```
-
-Afterwards, start the Remix development server like so:
-
-```sh
-npm run dev
-```
-
-Open up [http://localhost:3000](http://localhost:3000) and you should be ready to go!
-
-If you're used to using the `vercel dev` command provided by [Vercel CLI](https://vercel.com/cli) instead, you can also use that, but it's not needed.
+![Home](./public/home.png)
+![dashboard](./public/post.png)
+![add](./public/create.png)
+![edit](./public/edit.png)
