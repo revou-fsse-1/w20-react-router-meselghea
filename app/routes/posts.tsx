@@ -2,21 +2,21 @@ import { useState } from "react";
 import { json } from "@remix-run/node";
 import type { LoaderArgs } from "@remix-run/node";
 import { Form, Link, NavLink, Outlet, useLoaderData } from "@remix-run/react";
-import { getNoteListItems } from "~/models/note.server";
+import { getPostListItems } from "~/models/post.server";
 import { useUser } from "~/utils";
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const noteListItems = await getNoteListItems();
-  return json({ noteListItems });
+  const postListItems = await getPostListItems ();
+  return json({ postListItems });
 };
 
-export default function NotesPage() {
+export default function PostsPage() {
   const data = useLoaderData<typeof loader>();
   const user = useUser();
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredNoteListItems = data.noteListItems.filter((note) =>
-    note.title.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredPostListItems = data.postListItems.filter((post) =>
+    post.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +29,7 @@ export default function NotesPage() {
         <h1 className="text-3xl font-bold block uppercase">
           <Link to=".">Olabar</Link>
         </h1>
-        <p className="text-lg font-bolde block uppercase">{user.name}</p>
+        <p className="text-lg font-bolde block uppercase">{user.email}</p>
         <Form action="/logout" method="post">
           <button
             type="submit"
@@ -42,8 +42,8 @@ export default function NotesPage() {
 
       <main className="flex h-full bg-white">
         <div className="h-full w-80 border-r bg-gray-50">
-          <Link to="new" className=" p-4 text-xl block uppercase text-pink-600">
-            + New Note
+          <Link to="admin/new" className=" p-4 text-xl block uppercase text-pink-600" prefetch="intent">
+            + New Post
           </Link>
 
           <hr />
@@ -53,30 +53,30 @@ export default function NotesPage() {
               type="text"
               value={searchQuery}
               onChange={handleSearchChange}
-              placeholder="Search notes..."
+              placeholder="Search posts..."
               className="px-3 py-2 border rounded"
             />
           </div>
 
-          {filteredNoteListItems.length === 0 ? (
-            <p className="p-4">No notes found</p>
+          {filteredPostListItems.length === 0 ? (
+            <p className="p-4">No posts found</p>
           ) : (
             <ol>
-              {filteredNoteListItems.map((note) => (
-                <li key={note.id}>
+              {filteredPostListItems.map((post) => (
+                <li key={post.slug}>
                   <NavLink
                     className={({ isActive }) =>
                       `block border-b p-4 text-xl ${
                         isActive ? "bg-white" : ""
                       }`
                     }
-                    to={note.id}
+                    to={post.slug} prefetch="intent"
                   >
-                    📝 {note.title}
+                    📝 {post.title}
                   </NavLink>
-                  <Link to={`:noteId/edit`} className="text-pink-600">
-                    Edit
-                  </Link>
+                  <NavLink to={`admin/${post.slug}`} className="block p-4 text-xl text-pink-500">
+            Edit
+          </NavLink>
                 </li>
               ))}
             </ol>

@@ -32,10 +32,10 @@ export default function Index() {
               <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
                 {user ? (
                   <Link
-                    to="/notes"
+                    to="/posts"
                     className="flex items-center justify-center rounded-md border border-transparent bg-pink-600 px-4 py-3 text-base font-medium text-stone-300 shadow-sm hover:bg-pink-900 sm:px-8"
                   >
-                    selamat Datang {user.name} !
+                    selamat Datang {user.email} !
                   </Link>
                 ) : (
                   <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
