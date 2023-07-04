@@ -4,4 +4,12 @@ import { createRequestHandler } from "@remix-run/vercel";
 
 installGlobals();
 
-export default createRequestHandler({ build, mode: process.env.NODE_ENV });
+export default createRequestHandler({
+    build,
+    mode: process.env.NODE_ENV,
+    getLoadContext() {
+      return {
+        nodeLoadContext: true,
+      };
+    },
+  });
